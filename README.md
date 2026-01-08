@@ -6,6 +6,7 @@ It demonstrates complete frontend–backend–database integration with authenti
 
 🌐 Live Demo
 Frontend: https://ez-stay.vercel.app
+
 Backend API: https://ezstay-backend.onrender.com
 
 
