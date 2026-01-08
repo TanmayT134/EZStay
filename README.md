@@ -5,38 +5,61 @@ It demonstrates complete frontend–backend–database integration with authenti
 
 
 🌐 Live Demo
+
 Frontend: https://ez-stay.vercel.app
 
 Backend API: https://ezstay-backend.onrender.com
 
 
 ✨ Features
+
 👤 User
+
 User authentication (Register & Login)
+
 Browse cities
+
 View stays available in each city
+
 View stay details
 
+
 🧑‍💼 Admin
+
 Add new cities
+
 Add stays under specific cities
 
 
+
 🛠️ Tech Stack
+
 Frontend
+
 React.js
+
 Bootstrap
+
 Axios
+
 React Router DOM
 
+
 Backend
+
 Node.js
+
 Express.js
+
 JWT Authentication
 
+
 Database
+
 MySQL
+
 Deployment
+
 
 Frontend: Vercel
 
@@ -63,12 +86,17 @@ EZStay/
 
 
 🔐 Authentication
+
 JWT-based authentication
+
 Secure login & protected admin routes
+
 Role-based access (User / Admin)
 
 
+
 🧪 API Endpoints (Sample)
+
 Method	Endpoint	Description
 POST	/api/auth/register	Register user
 POST	/api/auth/login	Login user
@@ -79,23 +107,37 @@ POST	/api/stays	Add stay (Admin)
 
 
 🚀 Deployment Overview
+
 Backend deployed on Render as a Web Service
+
 MySQL database hosted on Railway
+
 Frontend deployed on Vercel
+
 Backend connected to Railway via public MySQL proxy
+
 Environment variables securely managed in cloud platforms
 
 
+
 📚 Learning Outcomes
+
 Built a complete full-stack application
+
 Implemented RESTful APIs
+
 Worked with MySQL relational database
+
 Managed JWT authentication
+
 Handled cloud deployment & networking issues
+
 Understood real-world production debugging
 
 
+
 👨‍💻 Author
+
 Tanmay Tawade
 
 
