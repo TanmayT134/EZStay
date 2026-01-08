@@ -49,3 +49,27 @@ exports.getStaysByCity = (req, res) => {
         res.json(result);
     });
 };
+
+/**
+ * GET STAY BY ID
+ */
+exports.getStayById = (req, res) => {
+    const stayId = req.params.id;
+
+    const query = `
+    SELECT s.*, c.name AS city_name
+    FROM stays s
+    JOIN cities c ON s.city_id = c.id
+    WHERE s.id = ?
+  `;
+
+    db.query(query, [stayId], (err, result) => {
+        if (err) return res.status(500).json(err);
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Stay not found" });
+        }
+
+        res.json(result[0]);
+    });
+};
