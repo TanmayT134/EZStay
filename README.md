@@ -24,11 +24,13 @@ View stays available in each city
 View stay details
 
 
+
 🧑‍💼 Admin
 
 Add new cities
 
 Add stays under specific cities
+
 
 
 
@@ -69,20 +71,35 @@ Database: Railway
 
 
 🗂️ Project Structure
+
 EZStay/
+
 ├── client/        # React frontend
+
 │   ├── src/
+
 │   ├── public/
+
 │   └── package.json
+
 │
+
 ├── server/        # Node.js backend
+
 │   ├── controllers/
+
 │   ├── routes/
+
 │   ├── db/
+
 │   ├── index.js
+
 │   └── package.json
+
 │
+
 └── README.md
+
 
 
 🔐 Authentication
@@ -98,12 +115,19 @@ Role-based access (User / Admin)
 🧪 API Endpoints (Sample)
 
 Method	Endpoint	Description
+
 POST	/api/auth/register	Register user
+
 POST	/api/auth/login	Login user
+
 GET	/api/cities	Get all cities
+
 POST	/api/cities	Add city (Admin)
+
 GET	/api/stays/:cityId	Get stays by city
+
 POST	/api/stays	Add stay (Admin)
+
 
 
 🚀 Deployment Overview
