@@ -73,3 +73,15 @@ exports.getStayById = (req, res) => {
         res.json(result[0]);
     });
 };
+
+exports.getAllStays = (req, res) => {
+    const query = "SELECT * FROM stays";
+
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: "Failed to fetch stays" });
+        }
+
+        res.json(result);
+    });
+};
