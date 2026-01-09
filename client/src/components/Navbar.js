@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ user, onLogout }) {
+function Navbar({ user, onLogout, setShowAuthModal, setAuthMode }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -18,21 +18,37 @@ function Navbar({ user, onLogout }) {
                 </Link>
 
                 <div className="ms-auto">
-                    {user ? (
+                    {!user ? (
                         <>
-                            <span className="text-white me-3">
-                                Hi, {user.name}
-                            </span>
                             <button
-                                className="btn btn-outline-light btn-sm"
-                                onClick={handleLogout}
+                                className="btn btn-outline-primary me-2"
+                                onClick={() => {
+                                    setAuthMode("login");
+                                    setShowAuthModal(true);
+                                }}
                             >
-                                Logout
+                                Login
+                            </button>
+
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => {
+                                    setAuthMode("signup");
+                                    setShowAuthModal(true);
+                                }}
+                            >
+                                Sign Up
                             </button>
                         </>
                     ) : (
-                        <span className="text-white">Guest</span>
+                        <>
+                            <span className="me-3">Hi, {user.name}</span>
+                            <button className="btn btn-danger" onClick={onLogout}>
+                                Logout
+                            </button>
+                        </>
                     )}
+
                 </div>
             </div>
         </nav>
