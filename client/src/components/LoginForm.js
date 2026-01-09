@@ -44,7 +44,7 @@ function LoginForm({ onLoginSuccess }) {
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="btn btn-primary w-100">Login</button>
+            <button className="btn btn-warning w-100">Login</button>
         </form>
     );
 }

@@ -1,0 +1,68 @@
+/* =========================
+EZStay Brand Theme (V4)
+   ========================= */
+
+/* Global font & smoothing */
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Brand color utility */
+.text-brand {
+    color: #ba8200;
+}
+
+/* Navbar branding */
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+/* Buttons */
+.btn-warning {
+    font-weight: 600;
+}
+
+.btn-warning:hover {
+    filter: brightness(0.95);
+}
+
+/* Card polish */
+.card {
+    border-radius: 12px;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+/* Card hover (very subtle) */
+.card:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+
+/* Section spacing */
+.section {
+    padding: 3rem 0;
+}
+
+/* Page headings */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Muted helper text */
+.text-muted-small {
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+}

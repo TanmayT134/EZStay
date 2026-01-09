@@ -11,17 +11,17 @@ function Navbar({ user, onLogout, setShowAuthModal, setAuthMode }) {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div className="container">
-                <Link className="navbar-brand" to="/">
-                    EZStay
+                <Link className="navbar-brand fw-bold text-dark" to="/">
+                    EZ<span className="text-brand">Stay</span>
                 </Link>
 
                 <div className="ms-auto">
                     {!user ? (
                         <>
                             <button
-                                className="btn btn-outline-primary me-2"
+                                className="btn btn-warning me-2"
                                 onClick={() => {
                                     setAuthMode("login");
                                     setShowAuthModal(true);
@@ -31,7 +31,7 @@ function Navbar({ user, onLogout, setShowAuthModal, setAuthMode }) {
                             </button>
 
                             <button
-                                className="btn btn-primary"
+                                className="btn btn-warning"
                                 onClick={() => {
                                     setAuthMode("signup");
                                     setShowAuthModal(true);

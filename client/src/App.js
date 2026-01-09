@@ -33,6 +33,12 @@ function App() {
     window.location.href = "/";
   };
 
+  const openSignupModal = () => {
+    setAuthMode("signup");
+    setShowAuthModal(true);
+  };
+
+
 
   return (
     <BrowserRouter>
@@ -49,10 +55,14 @@ function App() {
         <Route
           path="/"
           element={
-            <><Home />
-            </>
+            <Home
+              onGetStarted={openSignupModal}
+              user={user}
+            />
           }
         />
+
+
 
         <Route
           path="/admin"

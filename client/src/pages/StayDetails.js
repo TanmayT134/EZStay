@@ -25,22 +25,25 @@ function StayDetails() {
     }
 
     return (
-        <div className="container mt-4">
-            <h2>{stay.title}</h2>
-            <p className="text-muted">{stay.city_name}</p>
+        <div className="bg-light min-vh-100">
+            <div className="container mt-4">
+                <h2>{stay.title}</h2>
+                <p className="text-muted">{stay.city_name}</p>
 
-            <h4>₹{stay.price} / night</h4>
+                <h4>₹{stay.price} / night</h4>
 
-            <p className="mt-3">{stay.description}</p>
+                <p className="mt-3">{stay.description}</p>
 
-            {stay.image_url && (
-                <img
-                    src={stay.image_url}
-                    alt={stay.title}
-                    className="img-fluid mt-3"
-                />
-            )}
+                {stay.image_url && (
+                    <img
+                        src={stay.image_url}
+                        alt={stay.title}
+                        className="img-fluid mt-3"
+                    />
+                )}
+            </div>
         </div>
+
     );
 }
 

@@ -50,7 +50,7 @@ function SignupForm({ onSignupSuccess }) {
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="btn btn-primary w-100">Sign Up</button>
+            <button className="btn btn-warning w-100">Sign Up</button>
         </form>
     );
 }

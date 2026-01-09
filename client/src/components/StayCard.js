@@ -2,7 +2,7 @@ function StayCard({ stay, onClick }) {
     return (
         <div className="col-md-4 mb-3">
             <div
-                className="card h-100 shadow-sm"
+                className="card shadow-sm h-100 border-0"
                 style={{ cursor: "pointer" }}
                 onClick={onClick}
             >
