@@ -6,7 +6,8 @@ const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
 const {
     addStay,
     getStaysByCity,
-    getStayById
+    getStayById,
+    getAllStays
 } = require("../controllers/stayController");
 
 
@@ -14,6 +15,7 @@ const {
 router.post("/", addStay);
 
 // Get stays by city
+router.get("/", getAllStays);
 router.get("/city/:cityId", getStaysByCity);
 router.get("/:id", getStayById);
 
