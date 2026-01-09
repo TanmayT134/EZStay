@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
+import { Modal, Button } from "react-bootstrap";
+
 
 function Admin() {
     const [cityName, setCityName] = useState("");
     const [cityImage, setCityImage] = useState("");
+    const [cities, setCities] = useState([]);
+    const [stays, setStays] = useState([]);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [deleteType, setDeleteType] = useState(null); // "city" | "stay"
+    const [deleteId, setDeleteId] = useState(null);
+
+
 
     const [stay, setStay] = useState({
         city_id: "",
@@ -40,6 +49,94 @@ function Admin() {
             .catch(() => alert("Error adding stay"));
     };
 
+    const handleDeleteCity = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            await API.delete(`/cities/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            setCities((prev) => prev.filter((city) => city.id !== id));
+        } catch (err) {
+            alert("Failed to delete city");
+        }
+    };
+
+
+    const handleDeleteStay = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            await API.delete(`/stays/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Update UI immediately
+            setStays((prev) => prev.filter((stay) => stay.id !== id));
+        } catch (err) {
+            alert("Failed to delete stay");
+        }
+    };
+
+
+    useEffect(() => {
+        API.get("/cities")
+            .then((res) => setCities(res.data))
+            .catch(() => console.log("Error fetching cities"));
+
+        API.get("/stays")
+            .then((res) => setStays(res.data))
+            .catch(() => console.log("Error fetching stays"));
+    }, []);
+
+    const openDeleteConfirm = (type, id) => {
+        setDeleteType(type);
+        setDeleteId(id);
+        setShowConfirm(true);
+    };
+
+    const confirmDelete = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            if (deleteType === "stay") {
+                await API.delete(`/stays/${deleteId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setStays((prev) =>
+                    prev.filter((stay) => stay.id !== deleteId)
+                );
+            }
+
+            if (deleteType === "city") {
+                await API.delete(`/cities/${deleteId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setCities((prev) =>
+                    prev.filter((city) => city.id !== deleteId)
+                );
+            }
+
+            setShowConfirm(false);
+            setDeleteType(null);
+            setDeleteId(null);
+        } catch (err) {
+            alert("Delete failed");
+        }
+    };
+
+
     return (
         <div className="card p-4 mb-4">
             <h4>Admin Panel</h4>
@@ -62,6 +159,33 @@ function Admin() {
                 />
                 <button className="btn btn-primary">Add City</button>
             </form>
+
+            <hr />
+            <h6>Existing Cities</h6>
+
+            {cities.length === 0 ? (
+                <p className="text-muted">No cities available</p>
+            ) : (
+                <ul className="list-group mb-4">
+                    {cities.map((city) => (
+                        <li
+                            key={city.id}
+                            className="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                            <span>{city.name}</span>
+
+                            <button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => openDeleteConfirm("city", city.id)}
+                            >
+                                Delete
+                            </button>
+                        </li>
+                    ))}
+
+                </ul>
+            )}
+
 
             {/* Add Stay */}
             <form onSubmit={addStay}>
@@ -111,6 +235,59 @@ function Admin() {
                 />
                 <button className="btn btn-success">Add Stay</button>
             </form>
+
+            <hr />
+            <h6>Existing Stays</h6>
+
+            {stays.length === 0 ? (
+                <p className="text-muted">No stays available</p>
+            ) : (
+                <ul className="list-group">
+                    {stays.map((stay) => (
+                        <li
+                            key={stay.id}
+                            className="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                            <span>
+                                {stay.title} — ₹{stay.price}
+                            </span>
+
+                            <button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => openDeleteConfirm("stay", stay.id)}
+                            >
+                                Delete
+                            </button>
+                        </li>
+                    ))}
+
+                </ul>
+            )}
+
+            <Modal show={showConfirm} onHide={() => setShowConfirm(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <p>
+                        Are you sure you want to delete this{" "}
+                        <strong>{deleteType}</strong>?
+                        This action cannot be undone.
+                    </p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowConfirm(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={confirmDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
         </div>
     );
 }
